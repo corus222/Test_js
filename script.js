@@ -45,3 +45,4 @@ fetch('https://swapi.co/api/people/1')
     console.log('Probe');
     spinner.setAttribute('hidden', 'hidden');
   })
+  console.log(map);

@@ -1,0 +1,144 @@
+[33mcommit 9cbf6bc922ce64f35d7c615dc301f70db3e89ccb[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: corus222 <corus222@gmail.com>
+Date:   Thu Feb 20 18:44:26 2020 +0200
+
+    Start commit
+
+[1mdiff --git a/index.html b/index.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e8fd753[m
+[1m--- /dev/null[m
+[1m+++ b/index.html[m
+[36m@@ -0,0 +1,43 @@[m
+[32m+[m[32m<!DOCTYPE html>[m
+[32m+[m[32m<html lang="en">[m
+[32m+[m[32m<head>[m
+[32m+[m[32m  <meta charset="UTF-8">[m
+[32m+[m[32m  <meta name="viewport" content="width=device-width, initial-scale=1.0">[m
+[32m+[m[32m  <meta http-equiv="X-UA-Compatible" content="ie=edge">[m
+[32m+[m[32m  <style=C:/Users/A/Desktop/JS_class_8/style.css></style>[m
+[32m+[m[32m  <link rel="stylesheet" type="text/css" href="style.css" />[m
+[32m+[m
+[32m+[m[32m  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>[m
+[32m+[m[41m [m
+[32m+[m[32m  <title>JS_final</title>[m
+[32m+[m[32m</head>[m
+[32m+[m[32m<body>[m
+[32m+[m[32m  <!-- =========1================== -->[m
+[32m+[m[41m [m
+[32m+[m[32m<label for="">[m
+[32m+[m[32m  Enter your city: <input type="text" class="value">[m
+[32m+[m[32m</label>[m
+[32m+[m
+[32m+[m[32m<br><br>[m
+[32m+[m
+[32m+[m[32m<button type="button" class="button" id="take-request">Show the weather</button>[m
+[32m+[m
+[32m+[m[32m </div>[m
+[32m+[m[32m<br><br>[m
+[32m+[m[32m<div id="map" class="map">Map</div>[m
+[32m+[m[32m<div class="spinner" hidden> Loading.[m
+[32m+[m[32m</div>[m
+[32m+[m[32m<div id="output">[m[41m [m
+[32m+[m[32m<div class ="city"> </div>[m
+[32m+[m[32m<div class ="weather"> </div>[m
+[32m+[m[32m<div class ="temperature"> </div>[m
+[32m+[m[32m<div class ="wind"> </div>[m
+[32m+[m
+[32m+[m
+[32m+[m[32m<script src= C:/Users/_/Desktop/JS_final/script.js></script>[m
+[32m+[m
+[32m+[m[32m<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZrc2eE2af0MYr-uQ8mM54V1kkNYPgkmM&callback=initMap"></script>[m
+[32m+[m
+[32m+[m[32m</body>[m
+[32m+[m
+[32m+[m[32m</html>[m[41m [m
+[1mdiff --git a/script.js b/script.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7e9ad2e[m
+[1m--- /dev/null[m
+[1m+++ b/script.js[m
+[36m@@ -0,0 +1,47 @@[m
+[32m+[m[32m//Функционал:[m
+[32m+[m[32m//По вводу названия города или выбора города на карте отправлять[m[41m [m
+[32m+[m[32m//запрос на погодный АПИ и выводить на экран полученный ответ.[m
+[32m+[m
+[32m+[m[32m// ========================jquery==================[m
+[32m+[m[32m  var map;[m
+[32m+[m[32m  var geo;[m
+[32m+[m[32m      function initMap() {[m
+[32m+[m[32m        geo = new google.maps.Geocoder();[m
+[32m+[m[32m          var opt = {[m
+[32m+[m[32m            zoom: 8,[m[41m [m
+[32m+[m[32m          center : {[m
+[32m+[m[32m            lat: -34.397,[m[41m [m
+[32m+[m[32m            lng: 150.644[m
+[32m+[m[32m          }[m[41m    [m
+[32m+[m[32m        }[m
+[32m+[m[32m        map = new google.maps.Map(document.getElementById('map'),opt);[m
+[32m+[m[32m      }[m
+[32m+[m[41m     [m
+[32m+[m[32m//============================[m
+[32m+[m[32m// var takeRequest = document.querySelector('#take-request');[m
+[32m+[m[32m// takeRequest.addEventListener('click', () => {[m
+[32m+[m[32m//   const obj = {};[m
+[32m+[m[32m//   obj.city = city.value;[m
+[32m+[m[32m//   obj.weather = weather.value;[m
+[32m+[m[32m//   obj.temperature = temperature.value;[m
+[32m+[m[32m//   obj.wind = wind.value;[m
+[32m+[m
+[32m+[m[32m//   //textarea.value = JSON.stringify(obj);[m
+[32m+[m[32m// });[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m//========spiner============[m
+[32m+[m[32mconst spinner = document.querySelector('.spinner');[m
+[32m+[m
+[32m+[m[32mspinner.removeAttribute('hidden');[m
+[32m+[m[32mfetch('https://swapi.co/api/people/1')[m
+[32m+[m[32m  .then(data => data.json())[m
+[32m+[m[32m  .then(data => {[m
+[32m+[m[32m    document.querySelector('#output').innerText = JSON.stringify(obj);[m
+[32m+[m[32m  })[m
+[32m+[m[32m  .catch(error => console.log(new Error(error)))[m
+[32m+[m[32m  .finally(() => {[m
+[32m+[m[32m    console.log('Probe');[m
+[32m+[m[32m    spinner.setAttribute('hidden', 'hidden');[m
+[32m+[m[32m  })[m
+\ No newline at end of file[m
+[1mdiff --git a/stile.css b/stile.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ee3b379[m
+[1m--- /dev/null[m
+[1m+++ b/stile.css[m
+[36m@@ -0,0 +1,29 @@[m
+[32m+[m[32m* =========1============ */[m
+[32m+[m
+[32m+[m[32m.obj {[m
+[32m+[m[32mpadding: 20px;[m
+[32m+[m[32mborder: 1px solid black;[m
+[32m+[m[32m}[m
+[32m+[m[32m .map {[m
+[32m+[m	[32mposition:absolute ;[m
+[32m+[m	[32mright: -200px;[m
+[32m+[m	[32mtop: 20px;[m
+[32m+[m[32mmargin-right: 300px;[m
+[32m+[m[41m [m	[32mcolor: black;[m
+[32m+[m[41m [m	[32mborder: 2px solid black;[m
+[32m+[m[32m        height: 100%;[m
+[32m+[m[32m        background: gray;[m
+[32m+[m[32m        width: 400px;[m
+[32m+[m[32m        height: 400px;[m
+[32m+[m[41m        [m
+[32m+[m[32m      }[m
+[32m+[m[32m.button {[m
+[32m+[m	[32mposition:relative;[m
+[32m+[m
+[32m+[m	[32mborder:1px solid #000000;[m[41m [m
+[32m+[m	[32mbackground-color: gray;[m
+[32m+[m	[32m color:#000000;[m
+[32m+[m	[32m  width:200px;[m
+[32m+[m	[32m  height:20px;[m
+[32m+[m	[32m}[m
+[32m+[m[41m	[m
